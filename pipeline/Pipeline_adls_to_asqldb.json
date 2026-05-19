@@ -83,13 +83,13 @@
 				},
 				"inputs": [
 					{
-						"referenceName": "DS_DelimitedText",
+						"referenceName": "DS_Datalake_csvFile",
 						"type": "DatasetReference"
 					}
 				],
 				"outputs": [
 					{
-						"referenceName": "DS_AzureSqlTable",
+						"referenceName": "DS_ASQLDB_Table",
 						"type": "DatasetReference"
 					}
 				]
