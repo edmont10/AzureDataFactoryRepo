@@ -1,0 +1,26 @@
+# Se ejecutará cada vez que esta rama reciba cambios desde ADF
+trigger:
+  - adf_publish
+
+pool:
+  vmImage: 'ubuntu-latest'
+
+variables:
+  azureServiceConnection: 'ConexionAzureProyecto' # Tu conexión de servicio
+  resourceGroupName: 'grupo_recursos_1'          # Tu grupo de recursos
+  location: 'Brazil South'                             # Tu región
+
+steps:
+- task: AzureResourceManagerTemplateDeployment@3
+  displayName: 'Desplegar Cambios de Data Factory'
+  inputs:
+    deploymentScope: 'Resource Group'
+    azureResourceManagerConnection: '$(azureServiceConnection)'
+    action: 'Create Or Update Resource Group'
+    resourceGroupName: '$(resourceGroupName)'
+    location: '$(location)'
+    templateLocation: 'Linked artifact'
+    # Al estar parados dentro de adf_publish, las rutas cambian a relativas:
+    csmFile: '$(Build.Repository.LocalPath)/midatafactory1723/ARMTemplateForFactory.json'
+    csmParametersFile: '$(Build.Repository.LocalPath)/midatafactory1723/ARMTemplateParametersForFactory.json'
+    deploymentMode: 'Incremental'
