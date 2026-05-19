@@ -1,0 +1,31 @@
+# Starter pipeline
+# Start with a minimal pipeline that you can customize to build and deploy your code.
+# Add steps that build, run tests, deploy, and more:
+# https://aka.ms/yaml
+
+
+trigger:
+  - adf_publish
+
+pool:
+  vmImage: 'ubuntu-latest'
+
+variables:
+  azureServiceConnection: 'ConexionAzureProyecto' 
+  resourceGroupName: 'grupo_recursos_1' 
+  location: 'Brazil South' # O la región donde tengas tus recursos
+
+steps:
+- task: AzureResourceManagerTemplateDeployment@3
+  displayName: 'Desplegar Cambios de Data Factory'
+  inputs:
+    deploymentScope: 'Resource Group'
+    azureResourceManagerConnection: '$(azureServiceConnection)'
+    action: 'Create Or Update Resource Group'
+    resourceGroupName: '$(resourceGroupName)'
+    location: '$(location)'
+    templateLocation: 'Linked artifact'
+    # Apuntamos directo a tu carpeta detectada en adf_publish
+    csmFile: '$(Build.Repository.LocalPath)/midatafactory1723/ARMTemplateForFactory.json'
+    csmParametersFile: '$(Build.Repository.LocalPath)/midatafactory1723/ARMTemplateParametersForFactory.json'
+    deploymentMode: 'Incremental'
