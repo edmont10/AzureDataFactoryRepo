@@ -1,5 +1,5 @@
 {
-	"name": "Pipeline_adls_to_asqldb_final",
+	"name": "Pipeline_adls_to_asqldb",
 	"properties": {
 		"activities": [
 			{
