@@ -1,5 +1,5 @@
 {
-	"name": "DS_DelimitedText",
+	"name": "DS_Datalake_csvFile",
 	"properties": {
 		"linkedServiceName": {
 			"referenceName": "AzureDataLakeStorage1",
