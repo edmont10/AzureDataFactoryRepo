@@ -28,5 +28,6 @@
 			"schema": "dbo",
 			"table": "ComisionesEmpleados"
 		}
-	}
+	},
+	"type": "Microsoft.DataFactory/factories/datasets"
 }
